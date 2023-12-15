@@ -8,8 +8,8 @@ fun main() {
             var firstDigit: Int? = null
             var lastDigit: Int? = null
 
-            for (i in line.indices) {
 
+            for (i in line.indices) {
                 if (line[i].isDigit()) {
                     if (firstDigit == null) {
                         firstDigit = line[i].digitToInt()
