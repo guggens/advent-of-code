@@ -15,13 +15,17 @@ fun part1(input: List<String>): Int {
         var number = ""
         val currentLine = lines[lineIndex]
 
+        print("${lineIndex+1}")
+
         for (i in currentLine.indices) {
 
             if (currentLine[i].isDigit()) {
                 number += currentLine[i]
+            }
 
-            } else {
+            if (!currentLine[i].isDigit() || i == currentLine.indices.last) {
 
+                val endOfRowIsNumber = i == currentLine.indices.last && currentLine[i].isDigit()
                 //TODO: Bug is that we ignore end of line numbers, like 253 in row 26, cause there is no follow up char.
                 if (number.isNotEmpty()) {
 
@@ -34,14 +38,14 @@ fun part1(input: List<String>): Int {
                     val hasSpecialCharAbove = lineHasSymbol(
                         lines = lines,
                         lineIndex = lineIndex - 1,
-                        from = indexOfCharBeforeNumber,
+                        from = indexOfCharBeforeNumber + (if (endOfRowIsNumber) 1 else 0),
                         to = i + 1
                     )
 
                     val hasSpecialCharBelow = lineHasSymbol(
                         lines = lines,
                         lineIndex = lineIndex + 1,
-                        from = indexOfCharBeforeNumber,
+                        from = indexOfCharBeforeNumber + (if (endOfRowIsNumber) 1 else 0),
                         to = i + 1
                     )
 
